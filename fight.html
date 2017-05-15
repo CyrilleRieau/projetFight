@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Let's fight</title>
+    <link rel="stylesheet" href="fight.css">
+</head>
+
+<body>
+    <section id='zone1'>
+        <p id='name1'></p>
+        <img src='left.png' alt='Left Knight' title='Chevalier de gauche' id='imagegauche' />
+        <div id='person1'> </div>
+        <form action="" id='aplayer'>
+            <input type="submit">
+            <input type="submit">
+        </form>
+    </section>
+    <section id='zone2'>
+        <div id='person2'></div>
+        <form action="" id='bplayer'>
+            <input type="submit">
+            <input type="submit">
+        </form>
+        <p id='name2'></p>
+        <img src='right.png' alt='Right Knight' title='Chevalier de droite' id='imagedroite' />
+
+    </section>
+
+    <script>
+        let perso1 = {
+            name: '',
+            datas: {
+                "Points de Vie": 50,
+                "Points d'attaque": 8,
+                "Points de défense": 6,
+                "Inventaire": 4
+            },
+            attack: function() {
+                //formule math;
+            },
+            replicate: function() {
+                //formule math;
+            },
+            useinvent: function() {
+                //formule math;
+            }
+        }
+        let perso2 = {
+            name: '',
+            datas: {
+                "Points de Vie": 50,
+                "Points d'attaque": 6,
+                "Points de défense": 10,
+                "Inventaire": 3
+            },
+            attack: function() {
+                //formule math;
+            },
+            replicate: function() {
+                //formule math;
+            },
+            useinvent: function() {
+                //formule math;
+            }
+        }
+
+        let donnees1 = document.createElement('table');
+        for (let i = 0; i < Object.keys(perso1.datas).length; i++) {
+            let tr = document.createElement('tr');
+            let th = document.createElement('th');
+            th.textContent = (Object.keys(perso1.datas))[i];
+            tr.appendChild(th);
+            let td = document.createElement('td');
+            td.textContent = Object.values(perso1.datas)[i];
+            tr.appendChild(td);
+            donnees1.appendChild(tr);
+        };
+        let div1 = document.getElementById('person1');
+        div1.appendChild(donnees1);
+        let donnees2 = document.createElement('table');
+        for (let i = 0; i < Object.keys(perso2.datas).length; i++) {
+            let tr = document.createElement('tr');
+            let th = document.createElement('th');
+            th.textContent = (Object.keys(perso2.datas))[i];
+            tr.appendChild(th);
+            let td = document.createElement('td');
+            td.textContent = Object.values(perso2.datas)[i];
+            tr.appendChild(td);
+            donnees2.appendChild(tr);
+        };
+        let div2 = document.getElementById('person2');
+        div2.appendChild(donnees2);
+        let name1 = document.getElementById('name1');
+        let name2 = document.getElementById('name2');
+        let nomine1 = prompt('Quel est le nom du personnage 1 ?');
+        let nomine2 = prompt('Quel est le nom du personnage 2 ?');
+        perso1.name = nomine1;
+        perso2.name = nomine2;
+        name1.textContent = perso1.name;
+        name2.textContent = perso2.name;
+    </script>
+</body>
+
+</html>
