@@ -47,6 +47,8 @@ img {
     display: block;
 }
 
-p {
-    display: block;
+#name1 {
+    color: red;
+    font-size: 3.5em;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
