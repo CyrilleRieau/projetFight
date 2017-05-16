@@ -13,62 +13,67 @@
     <section id='zone1'>
         <p id='name1'></p>
         <img src='left.png' alt='Left Knight' title='Chevalier de gauche' id='imagegauche' />
-        <div id='person1'> </div>
         <form action="" id='aplayer'>
-            <input type="submit">
-            <input type="submit">
+            <input type="submit" value='Attaquer'>
+            <input type="submit" value='Utiliser une potion'>
+            <input type="submit" value='Se défendre'>
         </form>
+        <div id='person1'>
+            <table id='table1'></table>
+        </div>
     </section>
     <section id='zone2'>
-        <div id='person2'></div>
+        <div id='person2'>
+            <table id='table2'></table>
+        </div>
         <form action="" id='bplayer'>
-            <input type="submit">
-            <input type="submit">
+            <input type="submit" value='Attaquer'>
+            <input type="submit" value='Utiliser une potion'>
+            <input type="submit" value='Se défendre'>
         </form>
         <p id='name2'></p>
         <img src='right.png' alt='Right Knight' title='Chevalier de droite' id='imagedroite' />
-
     </section>
 
     <script>
         let perso1 = {
             name: '',
             datas: {
-                "Points de Vie": 50,
-                "Points d'attaque": 8,
-                "Points de défense": 6,
-                "Inventaire": 4
+                'Vie': 50,
+                'Attaque': 8,
+                'Défense': 6,
+                'Inventaire': 4
             },
             attack: function() {
-                //formule math;
+                //formule math pv2 += -(attaque- defense%3) ;
             },
-            replicate: function() {
-                //formule math;
+            defense: function() {
+                //formule math defense += defense/3;
             },
             useinvent: function() {
-                //formule math;
+                //formule math pv1 += 15;
             }
         }
         let perso2 = {
             name: '',
             datas: {
-                "Points de Vie": 50,
-                "Points d'attaque": 6,
-                "Points de défense": 10,
-                "Inventaire": 3
+                'Vie': 50,
+                'Attaque': 6,
+                'Défense': 10,
+                'Inventaire': 3
             },
             attack: function() {
-                //formule math;
+                //formule math pv1 += -(attaque- defense%3);
             },
-            replicate: function() {
-                //formule math;
+            defense: function() {
+                //formule math defense += defense/3;
             },
             useinvent: function() {
-                //formule math;
+                //formule math pv2 +=15;
             }
         }
 
-        let donnees1 = document.createElement('table');
+        let donnees1 = document.querySelector('#table1');
         for (let i = 0; i < Object.keys(perso1.datas).length; i++) {
             let tr = document.createElement('tr');
             let th = document.createElement('th');
@@ -79,9 +84,8 @@
             tr.appendChild(td);
             donnees1.appendChild(tr);
         };
-        let div1 = document.getElementById('person1');
-        div1.appendChild(donnees1);
-        let donnees2 = document.createElement('table');
+
+        let donnees2 = document.querySelector('#table2');
         for (let i = 0; i < Object.keys(perso2.datas).length; i++) {
             let tr = document.createElement('tr');
             let th = document.createElement('th');
@@ -92,8 +96,7 @@
             tr.appendChild(td);
             donnees2.appendChild(tr);
         };
-        let div2 = document.getElementById('person2');
-        div2.appendChild(donnees2);
+
         let name1 = document.getElementById('name1');
         let name2 = document.getElementById('name2');
         let nomine1 = prompt('Quel est le nom du personnage 1 ?');
@@ -102,6 +105,20 @@
         perso2.name = nomine2;
         name1.textContent = perso1.name;
         name2.textContent = perso2.name;
+
+        //Récuperation valeur de pv du perso2
+        console.log(document.getElementById('table2').getElementsByTagName('td')[0].innerHTML);
+        // Récuperation valeur de pv du perso1
+        console.log(document.getElementById('table1').getElementsByTagName('td')[0].innerHTML);
+        /*
+     let pV1 = document.getElementById('table1').getElementsByTagName('td')[0].innerHTML;
+    let pV2 = document.getElementById('table2').getElementsByTagName('td')[0].innerHTML;
+                
+  perso1.datas['Vie] = récupération des valeurs dans l'objet dans l'objet
+  perso2.datas['Vie] idem
+  Relier modification des valeurs de l'objet dans l'objet avec les valeurs de tableau affichées.
+ Donc fonction de modification, et ensuite associer les 2;
+                */
     </script>
 </body>
 
