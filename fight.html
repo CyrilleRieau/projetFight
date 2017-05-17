@@ -14,9 +14,9 @@
         <p id='name1'></p>
         <img src='left.png' alt='Left Knight' title='Chevalier de gauche' id='imagegauche' />
         <form action="" id='aplayer'>
-            <input type="submit" value='Attaquer'>
-            <input type="submit" value='Utiliser une potion'>
-            <input type="submit" value='Se défendre'>
+            <button type="button" id='attack1'>Attaquer</button>
+            <button type="button" id='invent1'>Utiliser une potion</button>
+            <button type="button" id='defense1'>Se défendre</button>
         </form>
         <div id='person1'>
             <table id='table1'></table>
@@ -27,9 +27,9 @@
             <table id='table2'></table>
         </div>
         <form action="" id='bplayer'>
-            <input type="submit" value='Attaquer'>
-            <input type="submit" value='Utiliser une potion'>
-            <input type="submit" value='Se défendre'>
+            <button type="button" id='attack2'>Attaquer</button>
+            <button type="button" id='invent2'>Utiliser une potion</button>
+            <button type="button" id='defense2'>Se défendre</button>
         </form>
         <p id='name2'></p>
         <img src='right.png' alt='Right Knight' title='Chevalier de droite' id='imagedroite' />
@@ -42,17 +42,9 @@
                 'Vie': 50,
                 'Attaque': 8,
                 'Défense': 6,
-                'Inventaire': 4
-            },
-            attack: function() {
-                //formule math pv2 += -(attaque- defense%3) ;
-            },
-            defense: function() {
-                //formule math defense += defense/3;
-            },
-            useinvent: function() {
-                //formule math pv1 += 15;
+                'Inventaire': 3
             }
+
         }
         let perso2 = {
             name: '',
@@ -60,16 +52,7 @@
                 'Vie': 50,
                 'Attaque': 6,
                 'Défense': 10,
-                'Inventaire': 3
-            },
-            attack: function() {
-                //formule math pv1 += -(attaque- defense%3);
-            },
-            defense: function() {
-                //formule math defense += defense/3;
-            },
-            useinvent: function() {
-                //formule math pv2 +=15;
+                'Inventaire': 5
             }
         }
 
@@ -80,6 +63,7 @@
             th.textContent = (Object.keys(perso1.datas))[i];
             tr.appendChild(th);
             let td = document.createElement('td');
+            td.id = 'gate' + i;
             td.textContent = Object.values(perso1.datas)[i];
             tr.appendChild(td);
             donnees1.appendChild(tr);
@@ -92,6 +76,7 @@
             th.textContent = (Object.keys(perso2.datas))[i];
             tr.appendChild(th);
             let td = document.createElement('td');
+            td.id = 'tope' + i;
             td.textContent = Object.values(perso2.datas)[i];
             tr.appendChild(td);
             donnees2.appendChild(tr);
@@ -106,19 +91,107 @@
         name1.textContent = perso1.name;
         name2.textContent = perso2.name;
 
-        //Récuperation valeur de pv du perso2
-        console.log(document.getElementById('table2').getElementsByTagName('td')[0].innerHTML);
-        // Récuperation valeur de pv du perso1
-        console.log(document.getElementById('table1').getElementsByTagName('td')[0].innerHTML);
+        let persos = [perso1, perso2];
+
+
+        //  Récupération valeur vie perso      console.log(perso1.datas.Vie);
         /*
-     let pV1 = document.getElementById('table1').getElementsByTagName('td')[0].innerHTML;
-    let pV2 = document.getElementById('table2').getElementsByTagName('td')[0].innerHTML;
-                
-  perso1.datas['Vie] = récupération des valeurs dans l'objet dans l'objet
-  perso2.datas['Vie] idem
-  Relier modification des valeurs de l'objet dans l'objet avec les valeurs de tableau affichées.
- Donc fonction de modification, et ensuite associer les 2;
-                */
+                //Récuperation valeur de pv du perso2
+                console.log(document.getElementById('table2').getElementsByTagName('td')[0].innerHTML);
+                // Récuperation valeur de pv du perso1
+                console.log(document.getElementById('table1').getElementsByTagName('td')[0].innerHTML);
+                /*
+             let pV1 = document.getElementById('table1').getElementsByTagName('td')[0].innerHTML;
+            let pV2 = document.getElementById('table2').getElementsByTagName('td')[0].innerHTML;
+        */
+
+        let attack = function(perso, persoautre) {
+            persoautre.datas.Vie -= (perso.datas.Attaque - ((persoautre.datas.Défense) / 3));
+        };
+
+        let defense = function(perso) {
+            perso.datas.Défense += ((perso.datas.Défense) / 3);
+        };
+        let useinvent = function(perso) {
+            perso.datas.Vie += 15;
+            perso.datas.Inventaire -= 1;
+        }
+
+        /*
+          perso1.datas['Vie] = récupération des valeurs dans l'objet dans l'objet
+          perso2.datas['Vie] idem
+          Relier modification des valeurs de l'objet dans l'objet avec les valeurs de tableau affichées.
+         Donc fonction de modification, et ensuite associer les 2;
+                        */
+        let defval = document.querySelector('#gate2');
+        let defendre = document.querySelector('#defense1');
+        defendre.addEventListener('click', function() {
+            if (perso1.datas.Défense < 15) {
+                defense(perso1);
+            };
+            defval.textContent = parseInt(perso1.datas.Défense);
+        });
+        let defval2 = document.querySelector('#tope2');
+        let defendre2 = document.querySelector('#defense2');
+        defendre2.addEventListener('click', function() {
+            if (perso2.datas.Défense < 15) {
+                defense(perso2);
+            };
+            defval2.textContent = parseInt(perso2.datas.Défense);
+        });
+        let lifeval = document.querySelector('#tope0');
+        let attaquer = document.querySelector('#attack1');
+        attaquer.addEventListener('click', function() {
+            attack(perso1, perso2);
+            if (perso2.datas.Vie <= 0) {
+                alert(perso2.name + ' est décédé !');
+                perso2.datas.Vie = 0;
+            }
+            lifeval.textContent = parseInt(perso2.datas.Vie);
+        });
+        let lifeval2 = document.querySelector('#gate0');
+        let attaquer2 = document.querySelector('#attack2');
+        attaquer2.addEventListener('click', function() {
+            attack(perso2, perso1);
+            if (perso1.datas.Vie <= 0) {
+                alert(perso1.name + ' est décédé !');
+                perso1.datas.Vie = 0;
+            }
+            lifeval2.textContent = parseInt(perso1.datas.Vie);
+        });
+
+        let valpot = document.querySelector('#gate0');
+        let potinv = document.querySelector('#gate3');
+        let invent = document.querySelector('#invent1');
+        invent.addEventListener('click', function() {
+            if (perso1.datas.Inventaire > 0) {
+                useinvent(perso1);
+                valpot.textContent = perso1.datas.Vie;
+                potinv.textContent = perso1.datas.Inventaire;
+            };
+        });
+
+        let valpot2 = document.querySelector('#tope0');
+        let potinv2 = document.querySelector('#tope3');
+        let invent2 = document.querySelector('#invent2');
+        invent2.addEventListener('click', function() {
+            if (perso2.datas.Inventaire > 0) {
+                useinvent(perso2);
+                valpot2.textContent = perso2.datas.Vie;
+                potinv2.textContent = perso2.datas.Inventaire;
+            }
+        });
+        /*
+                if (perso1.datas.Vie >= 35) {
+                    lifeval.style.color = 'green';
+                } else {
+                    lifeval.style.color = 'red';
+                }
+                if (perso2.datas.Vie >= 35) {
+                    lifeval2.style.color = 'green';
+                } else {
+                    lifeval2.style.color = 'red';
+                }*/
     </script>
 </body>
 

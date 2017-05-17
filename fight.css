@@ -77,18 +77,20 @@ p {
     align-self: center;
 }
 
-input {
+button {
     width: 100%;
     margin: 3px;
     background-color: royalblue;
     color: oldlace
 }
 
-input:hover {
+button:hover {
     background-color: yellowgreen;
     color: purple;
 }
 
+
+/*
 @keyframes toYellow {
     to {
         color: yellow;
@@ -116,3 +118,4 @@ input:hover {
 #table2>tr:nth-child(1)>td {
     color: green;
 }
+*/
