@@ -111,6 +111,8 @@ button:hover {
 }
 
 
+/*modifier le hover pour que le bouton soit indisponible pendant le disabled
+
 /*
 @keyframes toYellow {
     to {

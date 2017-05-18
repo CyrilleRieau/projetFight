@@ -52,8 +52,8 @@
                 'Attaque': 8,
                 'Défense': 6,
                 'Inventaire': 3
-            }
-
+            },
+            hasPlay: true
         }
         let perso2 = {
             name: '',
@@ -62,35 +62,95 @@
                 'Attaque': 7,
                 'Défense': 9,
                 'Inventaire': 5
+            },
+            hasPlay: false
+        }
+        let display = function() {
+            let donnees1 = document.querySelector('#table1');
+            for (let i = 0; i < Object.keys(perso1.datas).length; i++) {
+                let tr = document.createElement('tr');
+                let th = document.createElement('th');
+                th.textContent = (Object.keys(perso1.datas))[i];
+                tr.appendChild(th);
+                let td = document.createElement('td');
+                td.id = 'gate' + i;
+                td.textContent = parseInt(Object.values(perso1.datas)[i]);
+                tr.appendChild(td);
+                donnees1.appendChild(tr);
+            };
+
+            let donnees2 = document.querySelector('#table2');
+            for (let i = 0; i < Object.keys(perso2.datas).length; i++) {
+                let tr = document.createElement('tr');
+                let th = document.createElement('th');
+                th.textContent = (Object.keys(perso2.datas))[i];
+                tr.appendChild(th);
+                let td = document.createElement('td');
+                td.id = 'tope' + i;
+                td.textContent = parseInt(Object.values(perso2.datas)[i]);
+                tr.appendChild(td);
+                donnees2.appendChild(tr);
+            };
+
+            // let actperso1 = (document.querySelector('#aplayer'));
+            let buttons = document.querySelectorAll("#aplayer button");
+            // for each button disable = hasPlay
+            for (let b of buttons) {
+                b.disabled = !perso1.hasPlay;
+            }
+            // get action perso2
+            buttons = document.querySelectorAll("#bplayer button");
+            // for each button disable = hasPlay
+            for (let b of buttons) {
+                b.disabled = !perso2.hasPlay;
+            }
+
+            // let attack1 = document.querySelector('#attack1');
+            // let attack2 = document.querySelector('#attack2');
+            // let defense1 = document.querySelector('#defense1');
+            // let defense2 = document.querySelector('#defense2');
+            // let inventa1 = document.querySelector('#invent1');
+            // let inventa2 = document.querySelector('#invent2');
+            // let table1 = document.querySelector('#table1');
+            // let table2 = document.querySelector('#table2');
+            // if (perso1.hasPlay = true) {
+            //     attack2.disabled = true;
+            //     defense2.disabled = true;
+            //     inventa2.disabled = true;
+            //     attack1.disabled = false;
+            //     defense1.disabled = false;
+            //     inventa1.disabled = false;
+            // } else {
+            //     attack1.disabled = true;
+            //     defense1.disabled = true;
+            //     inventa1.disabled = true;
+            //     attack2.disabled = false;
+            //     defense2.disabled = false;
+            //     inventa2.disabled = false;
+            // }
+
+            let lifeval = document.querySelector('#tope0');
+            let lifeval2 = document.querySelector('#gate0');
+            if (perso2.datas.Vie >= 35) {
+                lifeval.style.color = 'green';
+            } else if (perso2.datas.Vie < 35 && perso2.datas.Vie >= 10) {
+                lifeval.style.color = 'yellow';
+            } else if (perso2.datas.Vie < 10 && perso2.datas.Vie > 0) {
+                lifeval.style.color = 'red';
+            } else {
+                lifeval.style.color = 'red'
+            };
+            if (perso1.datas.Vie >= 35) {
+                lifeval2.style.color = 'green';
+            } else if (perso1.datas.Vie < 35 && perso1.datas.Vie >= 10) {
+
+                lifeval2.style.color = 'yellow';
+            } else if (perso1.datas.Vie < 10 && perso1.datas.Vie > 0) {
+                lifeval2.style.color = 'red';
+            } else {
+                lifevale2.style.color = 'red';
             }
         }
-
-        let donnees1 = document.querySelector('#table1');
-        for (let i = 0; i < Object.keys(perso1.datas).length; i++) {
-            let tr = document.createElement('tr');
-            let th = document.createElement('th');
-            th.textContent = (Object.keys(perso1.datas))[i];
-            tr.appendChild(th);
-            let td = document.createElement('td');
-            td.id = 'gate' + i;
-            td.textContent = Object.values(perso1.datas)[i];
-            tr.appendChild(td);
-            donnees1.appendChild(tr);
-        };
-
-        let donnees2 = document.querySelector('#table2');
-        for (let i = 0; i < Object.keys(perso2.datas).length; i++) {
-            let tr = document.createElement('tr');
-            let th = document.createElement('th');
-            th.textContent = (Object.keys(perso2.datas))[i];
-            tr.appendChild(th);
-            let td = document.createElement('td');
-            td.id = 'tope' + i;
-            td.textContent = Object.values(perso2.datas)[i];
-            tr.appendChild(td);
-            donnees2.appendChild(tr);
-        };
-
         let name1 = document.getElementById('name1');
         let name2 = document.getElementById('name2');
         let nomine1 = prompt('Quel est le nom du personnage 1 ?');
@@ -101,6 +161,9 @@
         name2.textContent = perso2.name;
 
         let persos = [perso1, perso2];
+        display();
+
+
 
 
         //  Récupération valeur vie perso      console.log(perso1.datas.Vie);
@@ -143,11 +206,17 @@
             } else {
                 perso1.datas.Défense = 15;
             };
+            perso2.hasPlay = true;
+            perso1.hasPlay = false;
+
             deplacement1.style.animationName = 'taille1';
             deplacement1.addEventListener('animationend', function() {
                 deplacement1.style.animationName = '';
             });
-            defval.textContent = parseInt(perso1.datas.Défense);
+
+            table1.innerHTML = '';
+            table2.innerHTML = '';
+            display();
         });
         let defval2 = document.querySelector('#tope2');
         let defendre2 = document.querySelector('#defense2');
@@ -160,11 +229,16 @@
             } else {
                 perso2.datas.Défense = 15;
             };
+            perso1.hasPlay = true;
+            perso2.hasPlay = false;
             deplacement2.style.animationName = 'taille2';
             deplacement2.addEventListener('animationend', function() {
                 deplacement2.style.animationName = '';
             });
-            defval2.textContent = parseInt(perso2.datas.Défense);
+
+            table1.innerHTML = '';
+            table2.innerHTML = '';
+            display();
         });
         let textat1 = document.querySelector('#texto1');
         let textat2 = document.querySelector('#texto2');
@@ -172,7 +246,10 @@
         let attaquer = document.querySelector('#attack1');
         attaquer.addEventListener('click', function() {
             attack(perso1, perso2);
-            lifeval.textContent = parseInt(perso2.datas.Vie);
+            perso2.hasPlay = true;
+            perso1.hasPlay = false;
+            table1.innerHTML = '';
+            table2.innerHTML = '';
             if (perso2.datas.Vie >= 35) {
                 lifeval.style.color = 'green';
             } else if (perso2.datas.Vie < 35 && perso2.datas.Vie >= 10) {
@@ -185,6 +262,8 @@
                 perso2.datas.Vie = 0;
                 location.reload();
             }
+
+            display();
             deplacement1.style.animationName = 'deplacement';
             deplacement1.addEventListener('animationend', function() {
                 deplacement1.style.animationName = '';
@@ -202,7 +281,10 @@
         let attaquer2 = document.querySelector('#attack2');
         attaquer2.addEventListener('click', function() {
             attack(perso2, perso1);
-
+            perso1.hasPlay = true;
+            perso2.hasPlay = false;
+            table1.innerHTML = '';
+            table2.innerHTML = '';
             if (perso1.datas.Vie >= 35) {
                 lifeval2.style.color = 'green';
             } else if (perso1.datas.Vie < 35 && perso1.datas.Vie >= 10) {
@@ -215,7 +297,9 @@
                 perso1.datas.Vie = 0;
                 location.reload();
             }
-            lifeval2.textContent = parseInt(perso1.datas.Vie);
+            table1.innerHTML = '';
+            table2.innerHTML = '';
+            display();
 
             deplacement2.style.animationName = 'deplacement2';
             deplacement2.addEventListener('animationend', function() {
@@ -239,8 +323,11 @@
             });
             if (perso1.datas.Inventaire > 0) {
                 useinvent(perso1);
-                valpot.textContent = parseInt(perso1.datas.Vie);
-                potinv.textContent = perso1.datas.Inventaire;
+                perso2.hasPlay = true;
+                perso1.hasPlay = false;
+                table1.innerHTML = '';
+                table2.innerHTML = '';
+                display();
             };
         });
         let rambimagau2 = document.querySelector('#popogauche');
@@ -254,8 +341,11 @@
             });
             if (perso2.datas.Inventaire > 0) {
                 useinvent(perso2);
-                valpot2.textContent = parseInt(perso2.datas.Vie);
-                potinv2.textContent = perso2.datas.Inventaire;
+                perso1.hasPlay = true;
+                perso2.hasPlay = false;
+                table1.innerHTML = '';
+                table2.innerHTML = '';
+                display()
             }
         });
         if (perso2.datas.Vie >= 35) {
@@ -263,7 +353,17 @@
         }
         if (perso1.datas.Vie >= 35) {
             lifeval.style.color = 'green';
-        }
+        };
+        /*
+                let aplayer = document.querySelector('#aplayer');
+                let bplayer = document.querySelector('#bplayer');
+                if (aplayer = true) {
+                    bplayer = true;
+                    aplayer = false
+                } else {
+                    bplayer = false;
+                    aplayer = true;
+                }*/
     </script>
 </body>
 
