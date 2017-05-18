@@ -60,7 +60,7 @@
             datas: {
                 'Vie': 50,
                 'Attaque': 7,
-                'Défense': 10,
+                'Défense': 9,
                 'Inventaire': 5
             }
         }
@@ -153,7 +153,7 @@
         let defendre2 = document.querySelector('#defense2');
         defendre2.addEventListener('click', function() {
             if (perso2.datas.Défense < 15) {
-                defense(perso1);
+                defense(perso2);
                 if (perso2.datas.Défense >= 15) {
                     perso2.datas.Défense = 15;
                 }
