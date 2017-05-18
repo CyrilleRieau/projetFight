@@ -11,15 +11,20 @@
 
 <body>
     <section id='zone1'>
-        <p id='name1'></p>
-        <img src='left.png' alt='Left Knight' title='Chevalier de gauche' id='imagegauche' />
+        <div id='person1'>
+            <table id='table1'></table>
+        </div>
+
         <form action="" id='aplayer'>
             <button type="button" id='attack1'>Attaquer</button>
             <button type="button" id='invent1'>Utiliser une potion</button>
             <button type="button" id='defense1'>Se défendre</button>
         </form>
-        <div id='person1'>
-            <table id='table1'></table>
+        <p id='name1'></p>
+        <img src='left.png' alt='Left Knight' title='Chevalier de gauche' id='imagegauche' class='deplacement taille1' />
+        <img src='popodroite.jpg' alt='ContentRambo' title='rambo pouce bleu' id='popodroite' class='apparition1' />
+        <div id='texto1' class='deplatext1 aparitext1'>
+            <p>Bastoooooon!</p>
         </div>
     </section>
     <section id='zone2'>
@@ -32,7 +37,11 @@
             <button type="button" id='defense2'>Se défendre</button>
         </form>
         <p id='name2'></p>
-        <img src='right.png' alt='Right Knight' title='Chevalier de droite' id='imagedroite' />
+        <img src='right.png' alt='Right Knight' title='Chevalier de droite' id='imagedroite' class='deplacement2, taille2' />
+        <img src='popogauche.jpg' alt='ContentRambo' title='rambo pouce vert' id='popogauche' class='apparition2' />
+        <div id='texto2' class='deplatext2 aparitext2'>
+            <p>Braaaaaiiiinnn!</p>
+        </div>
     </section>
 
     <script>
@@ -50,7 +59,7 @@
             name: '',
             datas: {
                 'Vie': 50,
-                'Attaque': 6,
+                'Attaque': 7,
                 'Défense': 10,
                 'Inventaire': 5
             }
@@ -128,70 +137,131 @@
         defendre.addEventListener('click', function() {
             if (perso1.datas.Défense < 15) {
                 defense(perso1);
+                if (perso1.datas.Défense >= 15) {
+                    perso1.datas.Défense = 15;
+                }
+            } else {
+                perso1.datas.Défense = 15;
             };
+            deplacement1.style.animationName = 'taille1';
+            deplacement1.addEventListener('animationend', function() {
+                deplacement1.style.animationName = '';
+            });
             defval.textContent = parseInt(perso1.datas.Défense);
         });
         let defval2 = document.querySelector('#tope2');
         let defendre2 = document.querySelector('#defense2');
         defendre2.addEventListener('click', function() {
             if (perso2.datas.Défense < 15) {
-                defense(perso2);
+                defense(perso1);
+                if (perso2.datas.Défense >= 15) {
+                    perso2.datas.Défense = 15;
+                }
+            } else {
+                perso2.datas.Défense = 15;
             };
+            deplacement2.style.animationName = 'taille2';
+            deplacement2.addEventListener('animationend', function() {
+                deplacement2.style.animationName = '';
+            });
             defval2.textContent = parseInt(perso2.datas.Défense);
         });
+        let textat1 = document.querySelector('#texto1');
+        let textat2 = document.querySelector('#texto2');
         let lifeval = document.querySelector('#tope0');
         let attaquer = document.querySelector('#attack1');
         attaquer.addEventListener('click', function() {
             attack(perso1, perso2);
-            if (perso2.datas.Vie <= 0) {
-                alert(perso2.name + ' est décédé !');
+            lifeval.textContent = parseInt(perso2.datas.Vie);
+            if (perso2.datas.Vie >= 35) {
+                lifeval.style.color = 'green';
+            } else if (perso2.datas.Vie < 35 && perso2.datas.Vie >= 10) {
+
+                lifeval.style.color = 'yellow';
+            } else if (perso2.datas.Vie < 10 && perso2.datas.Vie > 0) {
+                lifeval.style.color = 'red';
+            } else {
+                alert(perso2.name + ' est décédé ! ' + perso1.name + ' est le VAINQUEUR !');
                 perso2.datas.Vie = 0;
             }
-            lifeval.textContent = parseInt(perso2.datas.Vie);
+            deplacement1.style.animationName = 'deplacement';
+            deplacement1.addEventListener('animationend', function() {
+                deplacement1.style.animationName = '';
+            });
+
+            textat1.style.animationName = 'apparitext1, deplatext1';
+            textat1.addEventListener('animationend', function() {
+                textat1.style.animationName = '';
+            });
         });
+        let deplacement1 = document.querySelector('#imagegauche');
+
+        let deplacement2 = document.querySelector('#imagedroite');
         let lifeval2 = document.querySelector('#gate0');
         let attaquer2 = document.querySelector('#attack2');
         attaquer2.addEventListener('click', function() {
             attack(perso2, perso1);
-            if (perso1.datas.Vie <= 0) {
-                alert(perso1.name + ' est décédé !');
+
+            if (perso1.datas.Vie >= 35) {
+                lifeval2.style.color = 'green';
+            } else if (perso1.datas.Vie < 35 && perso1.datas.Vie >= 10) {
+
+                lifeval2.style.color = 'yellow';
+            } else if (perso1.datas.Vie < 10 && perso1.datas.Vie > 0) {
+                lifeval2.style.color = 'red';
+            } else {
+                alert(perso1.name + ' est décédé ! ' + perso2.name + ' est le VAINQUEUR !');
                 perso1.datas.Vie = 0;
             }
             lifeval2.textContent = parseInt(perso1.datas.Vie);
+
+            deplacement2.style.animationName = 'deplacement2';
+            deplacement2.addEventListener('animationend', function() {
+                deplacement2.style.animationName = '';
+            });
+            textat2.style.animationName = 'apparitext2, deplatext2';
+            textat2.addEventListener('animationend', function() {
+                textat2.style.animationName = '';
+            });
         });
 
         let valpot = document.querySelector('#gate0');
         let potinv = document.querySelector('#gate3');
+        let rambimagau = document.querySelector('#popodroite');
         let invent = document.querySelector('#invent1');
+
         invent.addEventListener('click', function() {
+            rambimagau.style.animationName = 'apparition1';
+            rambimagau.addEventListener('animationend', function() {
+                rambimagau.style.animationName = '';
+            });
             if (perso1.datas.Inventaire > 0) {
                 useinvent(perso1);
-                valpot.textContent = perso1.datas.Vie;
+                valpot.textContent = parseInt(perso1.datas.Vie);
                 potinv.textContent = perso1.datas.Inventaire;
             };
         });
-
+        let rambimagau2 = document.querySelector('#popogauche');
         let valpot2 = document.querySelector('#tope0');
         let potinv2 = document.querySelector('#tope3');
         let invent2 = document.querySelector('#invent2');
         invent2.addEventListener('click', function() {
+            rambimagau2.style.animationName = 'apparition2';
+            rambimagau2.addEventListener('animationend', function() {
+                rambimagau2.style.animationName = '';
+            });
             if (perso2.datas.Inventaire > 0) {
                 useinvent(perso2);
-                valpot2.textContent = perso2.datas.Vie;
+                valpot2.textContent = parseInt(perso2.datas.Vie);
                 potinv2.textContent = perso2.datas.Inventaire;
             }
         });
-        /*
-                if (perso1.datas.Vie >= 35) {
-                    lifeval.style.color = 'green';
-                } else {
-                    lifeval.style.color = 'red';
-                }
-                if (perso2.datas.Vie >= 35) {
-                    lifeval2.style.color = 'green';
-                } else {
-                    lifeval2.style.color = 'red';
-                }*/
+        if (perso2.datas.Vie >= 35) {
+            lifeval2.style.color = 'green';
+        }
+        if (perso1.datas.Vie >= 35) {
+            lifeval.style.color = 'green';
+        }
     </script>
 </body>
 
