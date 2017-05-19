@@ -27,10 +27,10 @@
         </div>
 
         <div action="" id='aplayer'>
-            <button type="button" id='attack1'>Attaquer</button>
-            <button type="button" id='invent1'>Utiliser une potion</button>
-            <button type="button" id='defense1'>Se défendre</button>
-            <button type="button" id='special1'>Attaque Spéciale</button>
+            <button type="button" id='attack1' class="player1">Attaquer</button>
+            <button type="button" id='invent1' class="player1">Utiliser une potion</button>
+            <button type="button" id='defense1' class="player1">Se défendre</button>
+            <button type="button" id='special1' class="player1">Attaque Spéciale</button>
         </div>
     </section>
     <section id='zone2'>
@@ -48,10 +48,10 @@
             <p id='rando'>COOKIE MONSTER!</p>
         </div>
         <div action="" id='bplayer'>
-            <button type="button" id='attack2'>Attaquer</button>
-            <button type="button" id='invent2'>Utiliser une potion</button>
-            <button type="button" id='defense2'>Se défendre</button>
-            <button type="button" id='special2'>Attaque Spéciale</button>
+            <button type="button" id='attack2' class='player2'>Attaquer</button>
+            <button type="button" id='invent2' class='player2'>Utiliser une potion</button>
+            <button type="button" id='defense2' class='player2'>Se défendre</button>
+            <button type="button" id='special2' class='player2'>Attaque Spéciale</button>
         </div>
     </section>
 
@@ -79,6 +79,8 @@
             hasPlay: false
         }
         let display = function() {
+            table1.innerHTML = '';
+            table2.innerHTML = '';
             let donnees1 = document.querySelector('#table1');
             for (let i = 0; i < Object.keys(perso1.datas).length; i++) {
                 let tr = document.createElement('tr');
@@ -213,7 +215,8 @@
                         */
         let defval = document.querySelector('#gate2');
         let defendre = document.querySelector('#defense1');
-        defendre.addEventListener('click', function() {
+        defendre.addEventListener('click', function(e) {
+            e.target
             if (perso1.datas.Défense < 15) {
                 defense(perso1);
                 if (perso1.datas.Défense >= 15) {
@@ -229,9 +232,6 @@
             deplacement1.addEventListener('animationend', function() {
                 deplacement1.style.animationName = '';
             });
-
-            table1.innerHTML = '';
-            table2.innerHTML = '';
             display();
         });
         let defval2 = document.querySelector('#tope2');
@@ -252,8 +252,7 @@
                 deplacement2.style.animationName = '';
             });
 
-            table1.innerHTML = '';
-            table2.innerHTML = '';
+
             display();
         });
         let textat1 = document.querySelector('#texto1');
@@ -266,8 +265,6 @@
             attack(perso1, perso2);
             perso2.hasPlay = true;
             perso1.hasPlay = false;
-            table1.innerHTML = '';
-            table2.innerHTML = '';
             if (perso2.datas.Vie >= 35) {
                 lifeval.style.color = 'green';
             } else if (perso2.datas.Vie < 35 && perso2.datas.Vie >= 10) {
@@ -301,8 +298,6 @@
             attack(perso2, perso1);
             perso1.hasPlay = true;
             perso2.hasPlay = false;
-            table1.innerHTML = '';
-            table2.innerHTML = '';
             if (perso1.datas.Vie >= 35) {
                 lifeval2.style.color = 'green';
             } else if (perso1.datas.Vie < 35 && perso1.datas.Vie >= 10) {
@@ -315,8 +310,6 @@
                 perso1.datas.Vie = 0;
                 location.reload();
             }
-            table1.innerHTML = '';
-            table2.innerHTML = '';
             display();
 
             deplacement2.style.animationName = 'deplacement2';
@@ -333,8 +326,6 @@
             attackspe(perso1, perso2);
             perso2.hasPlay = true;
             perso1.hasPlay = false;
-            table1.innerHTML = '';
-            table2.innerHTML = '';
             if (perso2.datas.Vie >= 35) {
                 lifeval.style.color = 'green';
             } else if (perso2.datas.Vie < 35 && perso2.datas.Vie >= 10) {
@@ -365,8 +356,6 @@
             attackspe(perso2, perso1);
             perso1.hasPlay = true;
             perso2.hasPlay = false;
-            table1.innerHTML = '';
-            table2.innerHTML = '';
             if (perso1.datas.Vie >= 35) {
                 lifeval2.style.color = 'green';
             } else if (perso1.datas.Vie < 35 && perso1.datas.Vie >= 10) {
@@ -405,8 +394,6 @@
                 useinvent(perso1);
                 perso2.hasPlay = true;
                 perso1.hasPlay = false;
-                table1.innerHTML = '';
-                table2.innerHTML = '';
                 display();
             };
         });
@@ -423,8 +410,6 @@
                 useinvent(perso2);
                 perso1.hasPlay = true;
                 perso2.hasPlay = false;
-                table1.innerHTML = '';
-                table2.innerHTML = '';
                 display()
             }
         });
