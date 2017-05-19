@@ -12,7 +12,18 @@ table {
     background-color: tomato;
 }
 
-form {
+#aplayer {
+    margin: 5px;
+    border: 1px solid darkgray;
+    border-radius: 6px;
+    background-color: darkgoldenrod;
+    padding: 3px;
+    display: flex;
+    width: 300px;
+    height: 75px;
+}
+
+#bplayer {
     margin: 5px;
     border: 1px solid darkgray;
     border-radius: 6px;
