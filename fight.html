@@ -10,15 +10,16 @@
 </head>
 
 <body>
+    <p>Ugly Thrones</p>
     <section id='zone1'>
         <div id='person1'>
             <table id='table1'></table>
         </div>
         <p id='name1'></p>
-        <img src='left.png' alt='Left Knight' title='Chevalier de gauche' id='imagegauche' class='deplacement taille1' />
+        <img src='character.jpeg' alt='Tyrion L' title='Perso de gauche' id='imagegauche' class='deplacement taille1' />
         <img src='popodroite.jpg' alt='ContentRambo' title='rambo pouce bleu' id='popodroite' class='apparition1' />
         <div id='texto1' class='deplatext1 aparitext1'>
-            <p id='rando'>Bastoooooon!</p>
+            <p id='rando'>For the Cookie!</p>
         </div>
         <div action="" id='aplayer'>
             <button type="button" id='attack1'>Attaquer</button>
@@ -32,10 +33,10 @@
         </div>
 
         <p id='name2'></p>
-        <img src='right.png' alt='Right Knight' title='Chevalier de droite' id='imagedroite' class='deplacement2, taille2' />
+        <img src='charct2.jpg' alt='White Walker' title='Perso de droite' id='imagedroite' class='deplacement2, taille2' />
         <img src='popogauche.jpg' alt='ContentRambo' title='rambo pouce vert' id='popogauche' class='apparition2' />
         <div id='texto2' class='deplatext2 aparitext2'>
-            <p id='rando'>Braaaaaiiiinnn!</p>
+            <p id='rando'>Cookiiiiiiies!</p>
         </div>
         <div action="" id='bplayer'>
             <button type="button" id='attack2'>Attaquer</button>
@@ -311,8 +312,8 @@
             });
         });
 
-        let valpot = document.querySelector('#gate0');
-        let potinv = document.querySelector('#gate3');
+        /*let valpot = document.querySelector('#gate0');
+        let potinv = document.querySelector('#gate3');*/
         let rambimagau = document.querySelector('#popodroite');
         let invent = document.querySelector('#invent1');
 
@@ -331,8 +332,8 @@
             };
         });
         let rambimagau2 = document.querySelector('#popogauche');
-        let valpot2 = document.querySelector('#tope0');
-        let potinv2 = document.querySelector('#tope3');
+        /*let valpot2 = document.querySelector('#tope0');
+        let potinv2 = document.querySelector('#tope3');*/
         let invent2 = document.querySelector('#invent2');
         invent2.addEventListener('click', function() {
             rambimagau2.style.animationName = 'apparition2';

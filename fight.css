@@ -1,6 +1,7 @@
 body {
     background-image: url("backgrd.jpg");
     background-position: fixed;
+    background-size: cover;
 }
 
 table {
@@ -77,7 +78,7 @@ td {
 
 #imagedroite {
     position: relative;
-    height: 225px;
+    height: 233px;
     width: 180px;
     align-self: center;
 }
@@ -85,8 +86,8 @@ td {
 #imagegauche {
     position: relative;
     align-self: center;
-    height: 255px;
-    width: 220px;
+    height: 233px;
+    width: 233px;
 }
 
 div {
@@ -94,9 +95,9 @@ div {
 }
 
 p {
-    color: black;
-    font-size: 2.4em;
-    text-shadow: 2px 1px 1.6px orange;
+    color: darkred;
+    font-size: 2.8em;
+    text-shadow: 2px 1px 1.6px orangered;
     font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
     font-weight: bold;
     text-align: center;
@@ -114,6 +115,17 @@ button {
     color: #DB2727;
     border-radius: 7px;
     margin: 2px;
+}
+
+button:disabled {
+    width: 95px;
+    height: 70px;
+    font-size: 1.16em;
+    background-color: firebrick;
+    color: royalblue;
+    border-radius: 7px;
+    margin: 2px;
+    pointer-events: none;
 }
 
 button:hover {
@@ -190,16 +202,16 @@ button:hover {
 
 @keyframes taille1 {
     0% {
-        height: 255px;
-        width: 220px;
+        height: 233px;
+        width: 233px;
     }
     50% {
         height: 300px;
-        width: 260px;
+        width: 300px;
     }
     100% {
-        height: 255px;
-        width: 220px;
+        height: 233px;
+        width: 233px;
     }
 }
 
@@ -210,16 +222,16 @@ button:hover {
 
 @keyframes taille2 {
     0% {
-        height: 225px;
-        width: 180px;
+        height: 237px;
+        width: 150px;
     }
     50% {
         height: 280px;
-        width: 210px;
+        width: 180px;
     }
     100% {
-        height: 225px;
-        width: 180px;
+        height: 237px;
+        width: 150px;
     }
 }
 
@@ -352,7 +364,7 @@ button:hover {
 
 .apparitext1 {
     animation-name: '';
-    animation-duration: 1s;
+    animation-duration: 0.5s;
 }
 
 @keyframes apparitext2 {
@@ -369,5 +381,31 @@ button:hover {
 
 .apparitext2 {
     animation-name: '';
-    animation-duration: 1s;
+    animation-duration: 0.5s;
+}
+
+#name1 {
+    color: black;
+    font-size: 2.4em;
+    text-shadow: 2px 1px 1.6px orange;
+    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    margin: 0;
+    padding: 0;
+    align-self: center;
+}
+
+#name2 {
+    color: black;
+    font-size: 2.4em;
+    text-shadow: 2px 1px 1.6px orange;
+    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    margin: 0;
+    padding: 0;
+    align-self: center;
 }

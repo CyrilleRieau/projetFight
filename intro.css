@@ -19,6 +19,8 @@ section {
 }
 
 button {
+    border-radius: 12%;
+    box-shadow: 2px 2px black;
     width: 150px;
     height: 125px;
     text-align: center;
