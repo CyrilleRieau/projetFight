@@ -19,11 +19,13 @@ section {
 }
 
 button {
+    background-color: antiquewhite;
+    text-shadow: 2px 2px darkblue;
     border-radius: 12%;
-    box-shadow: 2px 2px black;
+    box-shadow: 1px 1px black;
     width: 150px;
     height: 125px;
     text-align: center;
-    color: blue;
+    color: orangered;
     font-size: 2em;
 }

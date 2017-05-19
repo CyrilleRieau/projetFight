@@ -11,6 +11,7 @@
 
 <body>
     <p>Ugly Thrones</p>
+    <audio src='music.mp3' autoplay loop volume='0.5'></audio>
     <section id='zone1'>
         <div id='person1'>
             <table id='table1'></table>
@@ -21,11 +22,16 @@
         <div id='texto1' class='deplatext1 aparitext1'>
             <p id='rando'>For the Cookie!</p>
         </div>
+        <div id='textos1' class='deplatext1 aparitext1'>
+            <p id='rando'>FOR THE BROWNIE!</p>
+        </div>
+
         <div action="" id='aplayer'>
             <button type="button" id='attack1'>Attaquer</button>
             <button type="button" id='invent1'>Utiliser une potion</button>
             <button type="button" id='defense1'>Se défendre</button>
-            </form>
+            <button type="button" id='special1'>Attaque Spéciale</button>
+        </div>
     </section>
     <section id='zone2'>
         <div id='person2'>
@@ -38,14 +44,20 @@
         <div id='texto2' class='deplatext2 aparitext2'>
             <p id='rando'>Cookiiiiiiies!</p>
         </div>
+        <div id='textos2' class='deplatext2 aparitext2'>
+            <p id='rando'>COOKIE MONSTER!</p>
+        </div>
         <div action="" id='bplayer'>
             <button type="button" id='attack2'>Attaquer</button>
             <button type="button" id='invent2'>Utiliser une potion</button>
             <button type="button" id='defense2'>Se défendre</button>
-            </form>
+            <button type="button" id='special2'>Attaque Spéciale</button>
+        </div>
     </section>
 
     <script>
+        let music = document.querySelector('audio');
+        music.volume = 0.5;
         let perso1 = {
             name: '',
             datas: {
@@ -189,7 +201,10 @@
             perso.datas.Vie += 15;
             perso.datas.Inventaire -= 1;
         }
-
+        let attackspe = function(perso, persoautre) {
+            persoautre.datas.Vie -= ((perso.datas.Attaque) * 3 - ((persoautre.datas.Défense) / 2));
+            perso.datas.Vie -= (perso.datas.Vie) / 4;
+        };
         /*
           perso1.datas['Vie] = récupération des valeurs dans l'objet dans l'objet
           perso2.datas['Vie] idem
@@ -243,6 +258,8 @@
         });
         let textat1 = document.querySelector('#texto1');
         let textat2 = document.querySelector('#texto2');
+        let textats1 = document.querySelector('#textos1');
+        let textats2 = document.querySelector('#textos2');
         let lifeval = document.querySelector('#tope0');
         let attaquer = document.querySelector('#attack1');
         attaquer.addEventListener('click', function() {
@@ -311,7 +328,69 @@
                 textat2.style.animationName = '';
             });
         });
+        let attaqspe = document.querySelector('#special1');
+        attaqspe.addEventListener('click', function() {
+            attackspe(perso1, perso2);
+            perso2.hasPlay = true;
+            perso1.hasPlay = false;
+            table1.innerHTML = '';
+            table2.innerHTML = '';
+            if (perso2.datas.Vie >= 35) {
+                lifeval.style.color = 'green';
+            } else if (perso2.datas.Vie < 35 && perso2.datas.Vie >= 10) {
 
+                lifeval.style.color = 'yellow';
+            } else if (perso2.datas.Vie < 10 && perso2.datas.Vie > 0) {
+                lifeval.style.color = 'red';
+            } else {
+                alert(perso2.name + ' est décédé ! ' + perso1.name + ' est le VAINQUEUR !');
+                perso2.datas.Vie = 0;
+                location.reload();
+            }
+
+            display();
+            deplacement1.style.animationName = 'deplacement';
+            deplacement1.addEventListener('animationend', function() {
+                deplacement1.style.animationName = '';
+            });
+
+            textats1.style.animationName = 'apparitext1, deplatext1';
+            textats1.addEventListener('animationend', function() {
+                textats1.style.animationName = '';
+            });
+        });
+
+        let attaqspe2 = document.querySelector('#special2');
+        attaqspe2.addEventListener('click', function() {
+            attackspe(perso2, perso1);
+            perso1.hasPlay = true;
+            perso2.hasPlay = false;
+            table1.innerHTML = '';
+            table2.innerHTML = '';
+            if (perso1.datas.Vie >= 35) {
+                lifeval2.style.color = 'green';
+            } else if (perso1.datas.Vie < 35 && perso1.datas.Vie >= 10) {
+
+                lifeval2.style.color = 'yellow';
+            } else if (perso1.datas.Vie < 10 && perso1.datas.Vie > 0) {
+                lifeval2.style.color = 'red';
+            } else {
+                alert(perso1.name + ' est décédé ! ' + perso2.name + ' est le VAINQUEUR !');
+                perso1.datas.Vie = 0;
+                location.reload();
+            }
+
+            display();
+            deplacement2.style.animationName = 'deplacement2';
+            deplacement2.addEventListener('animationend', function() {
+                deplacement2.style.animationName = '';
+            });
+
+            textats2.style.animationName = 'apparitext2, deplatext2';
+            textats2.addEventListener('animationend', function() {
+                textats2.style.animationName = '';
+            });
+        });
         /*let valpot = document.querySelector('#gate0');
         let potinv = document.querySelector('#gate3');*/
         let rambimagau = document.querySelector('#popodroite');
