@@ -256,7 +256,7 @@
 
         // Par Jean //... En fait n'a pas changé ... Toujours 2 eventlistener... Pas trouvé la bonne technique...
         defendre.addEventListener('click', clickDefense);
-        defense2.addEventListener('click', clickDefense);
+        //defense2.addEventListener('click', clickDefense); Supprimer cet evenement
 
         function clickDefense() {
             if (this.classList.contains('player1')) {
@@ -265,7 +265,9 @@
                 deplacement1.addEventListener('animationend', function() {
                     deplacement1.style.animationName = '';
                 })
-            } else if (this.classList.contains('player2')) {
+            } else { //modifier le else pour que lance le click du bouton b...// (this.classList.contains('player2'))
+                //let buttons = document.querySelector('#bplayer button');
+                //buttons.enabled; Ne fonctionne pas avec cela
                 defense(perso2, perso1);
                 deplacement2.style.animationName = 'taille2';
                 deplacement2.addEventListener('animationend', function() {
