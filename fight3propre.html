@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Let's fight</title>
+    <link rel="stylesheet" href="fight.css">
+    <link rel="icon" type="image/png" href="icone.png" />
+</head>
+
+<body>
+    <p>Ugly Thrones</p>
+    <audio src='music.mp3' autoplay loop volume='0.5'></audio>
+    <section id='zone1'>
+        <div id='person1'>
+            <table id='table1'></table>
+        </div>
+        <p id='name1'></p>
+        <img src='character.jpeg' alt='Tyrion L' title='Perso de gauche' id='imagegauche' class='deplacement taille1' />
+        <img src='popodroite.jpg' alt='ContentRambo' title='rambo pouce bleu' id='popodroite' class='apparition1' />
+        <div id='texto1' class='deplatext1 aparitext1'>
+            <p id='rando'>For the Cookie!</p>
+        </div>
+        <div id='textos1' class='deplatext1 aparitext1'>
+            <p id='rando'>FOR THE BROWNIE!</p>
+        </div>
+
+        <div action="" id='aplayer'>
+            <button type="button" id='attack1' class="player1">Attaquer</button>
+            <button type="button" id='invent1' class="player1">Utiliser une potion</button>
+            <button type="button" id='defense1' class="player1">Se défendre</button>
+            <button type="button" id='special1' class="player1">Attaque Spéciale</button>
+        </div>
+    </section>
+    <section id='zone2'>
+        <div id='person2'>
+            <table id='table2'></table>
+        </div>
+
+        <p id='name2'></p>
+        <img src='charct2.jpg' alt='White Walker' title='Perso de droite' id='imagedroite' class='deplacement2, taille2' />
+        <img src='popogauche.jpg' alt='ContentRambo' title='rambo pouce vert' id='popogauche' class='apparition2' />
+        <div id='texto2' class='deplatext2 aparitext2'>
+            <p id='rando'>Cookiiiiiiies!</p>
+        </div>
+        <div id='textos2' class='deplatext2 aparitext2'>
+            <p id='rando'>COOKIE MONSTER!</p>
+        </div>
+        <div action="" id='bplayer'>
+            <button type="button" id='attack2' class='player2'>Attaquer</button>
+            <button type="button" id='invent2' class='player2'>Utiliser une potion</button>
+            <button type="button" id='defense2' class='player2'>Se défendre</button>
+            <button type="button" id='special2' class='player2'>Attaque Spéciale</button>
+        </div>
+    </section>
+
+    <script>
+        let music = document.querySelector('audio');
+        music.volume = 0.5;
+        let perso1 = {
+            name: '',
+            datas: {
+                'Vie': 50,
+                'Attaque': 8,
+                'Défense': 6,
+                'Inventaire': 3
+            },
+            hasToPlay: true
+        };
+        let perso2 = {
+            name: '',
+            datas: {
+                'Vie': 50,
+                'Attaque': 7,
+                'Défense': 9,
+                'Inventaire': 5
+            },
+            hasToPlay: false
+        };
+
+        let persos = [perso1, perso2];
+
+        let display = function() {
+            table1.innerHTML = '';
+            table2.innerHTML = '';
+            let donnees1 = document.querySelector('#table1');
+            for (let i = 0; i < Object.keys(perso1.datas).length; i++) {
+                let tr = document.createElement('tr');
+                let th = document.createElement('th');
+                th.textContent = (Object.keys(perso1.datas))[i];
+                tr.appendChild(th);
+                let td = document.createElement('td');
+                td.id = 'gate' + i;
+                td.textContent = parseInt(Object.values(perso1.datas)[i]);
+                tr.appendChild(td);
+                donnees1.appendChild(tr);
+            };
+
+            let donnees2 = document.querySelector('#table2');
+            for (let i = 0; i < Object.keys(perso2.datas).length; i++) {
+                let tr = document.createElement('tr');
+                let th = document.createElement('th');
+                th.textContent = (Object.keys(perso2.datas))[i];
+                tr.appendChild(th);
+                let td = document.createElement('td');
+                td.id = 'tope' + i;
+                td.textContent = parseInt(Object.values(perso2.datas)[i]);
+                tr.appendChild(td);
+                donnees2.appendChild(tr);
+            };
+        };
+        let buttons = document.querySelectorAll("#aplayer button");
+        for (let b of buttons) {
+            b.disabled = !perso1.hasToPlay;
+        };
+        buttons = document.querySelectorAll("#bplayer button");
+        for (let b of buttons) {
+            b.disabled = !perso2.hasToPlay;
+        };
+
+        let lifeval = document.querySelector('#tope0');
+        let lifeval2 = document.querySelector('#gate0');
+        if (perso2.datas.Vie >= 35) {
+            lifeval.style.color = 'green';
+        } else if (perso2.datas.Vie < 35 && perso2.datas.Vie >= 10) {
+            lifeval.style.color = 'yellow';
+        } else if (perso2.datas.Vie < 10 && perso2.datas.Vie > 0) {
+            lifeval.style.color = 'red';
+        } else {
+            lifeval.style.color = 'red'
+        };
+        if (perso1.datas.Vie >= 35) {
+            lifeval2.style.color = 'green';
+        } else if (perso1.datas.Vie < 35 && perso1.datas.Vie >= 10) {
+            lifeval2.style.color = 'yellow';
+        } else if (perso1.datas.Vie < 10 && perso1.datas.Vie > 0) {
+            lifeval2.style.color = 'red';
+        } else {
+            lifevale2.style.color = 'red';
+        };
+
+        let name1 = document.getElementById('name1');
+        let name2 = document.getElementById('name2');
+        let nomine1 = prompt('Quel est le nom du personnage 1 ?');
+        let nomine2 = prompt('Quel est le nom du personnage 2 ?');
+        perso1.name = nomine1;
+        perso2.name = nomine2;
+        name1.textContent = perso1.name;
+        name2.textContent = perso2.name;
+
+        display();
+
+        let attack = function(perso, persoautre) {
+            persoautre.datas.Vie -= (perso.datas.Attaque - ((persoautre.datas.Défense) / 3));
+            persoautre.hasToPlay = true;
+            perso.hasToPlay = false;
+            if (persoautre.datas.Vie <= 0) {
+                alert(persoautre.name + ' est décédé ! ' + perso.name + ' est le VAINQUEUR !');
+                persoautre.datas.Vie = 0;
+                location.reload();
+            }
+        };
+
+        let defense = function(perso, persoautre) {
+            if (perso.datas.Défense < 15) {
+                perso.datas.Défense += ((perso.datas.Défense) / 3);
+                if (perso.datas.Défense >= 15) {
+                    perso.datas.Défense = 15;
+                }
+            } else {
+                perso.datas.Défense = 15;
+            };
+            persoautre.hasToPlay = true;
+            perso.hasToPlay = false;
+        };
+
+        let useinvent = function(perso, persoautre) {
+            if (perso.datas.Inventaire > 0) {
+                perso.datas.Vie += 15;
+                perso.datas.Inventaire -= 1;
+            };
+            persoautre.hasToPlay = true;
+            perso.hasToPlay = false;
+        };
+
+        let attackspe = function(perso, persoautre) {
+            persoautre.datas.Vie -= ((perso.datas.Attaque) * 3 - ((persoautre.datas.Défense) / 2));
+            perso.datas.Vie -= (perso.datas.Vie) / 4;
+            persoautre.hasToPlay = true;
+            perso.hasToPlay = false;
+            if (persoautre.datas.Vie <= 0) {
+                alert(persoautre.name + ' est décédé ! ' + perso.name + ' est le VAINQUEUR !');
+                persoautre.datas.Vie = 0;
+                location.reload();
+            };
+            if (perso.datas.Vie <= 0) {
+                alert(perso.name + ' est décédé ! ' + persoautre.name + ' est le VAINQUEUR !');
+                perso.datas.Vie = 0;
+                location.reload();
+            };
+        };
+
+        let defendre = document.querySelector('#defense1');
+        let player1 = document.querySelectorAll('.player1');
+        let player2 = document.querySelector('.player2');
+        let defense2 = document.querySelector('#defense2');
+        defendre.addEventListener('click', clickDefense);
+        defense2.addEventListener('click', clickDefense);
+
+        function clickDefense() {
+            if (this.classList.contains('player1')) {
+                defense(perso1, perso2);
+                deplacement1.style.animationName = 'taille1';
+                deplacement1.addEventListener('animationend', function() {
+                    deplacement1.style.animationName = '';
+                })
+            } else {
+                defense(perso2, perso1);
+                deplacement2.style.animationName = 'taille2';
+                deplacement2.addEventListener('animationend', function() {
+                    deplacement2.style.animationName = '';
+                })
+            };
+            display();
+        };
+
+        let textat1 = document.querySelector('#texto1');
+        let textat2 = document.querySelector('#texto2');
+        let textats1 = document.querySelector('#textos1');
+        let textats2 = document.querySelector('#textos2');
+        let attaquer = document.querySelector('#attack1');
+        let deplacement1 = document.querySelector('#imagegauche');
+        let deplacement2 = document.querySelector('#imagedroite');
+        let attaquer2 = document.querySelector('#attack2');
+        attaquer.addEventListener('click', clickAttaque);
+        attaquer2.addEventListener('click', clickAttaque);
+
+        function clickAttaque() {
+            if (this.classList.contains('player1')) {
+                attack(perso1, perso2);
+                deplacement1.style.animationName = 'deplacement';
+                deplacement1.addEventListener('animationend', function() {
+                    deplacement1.style.animationName = '';
+                });
+                textat1.style.animationName = 'apparitext1, deplatext1';
+                textat1.addEventListener('animationend', function() {
+                    textat1.style.animationName = '';
+                });
+                display();
+            } else {
+                attack(perso2, perso1);
+                deplacement2.style.animationName = 'deplacement2';
+                deplacement2.addEventListener('animationend', function() {
+                    deplacement2.style.animationName = '';
+                });
+                textat2.style.animationName = 'apparitext2, deplatext2';
+                textat2.addEventListener('animationend', function() {
+                    textat2.style.animationName = '';
+                });
+                display();
+            };
+        };
+
+        let attaqspe = document.querySelector('#special1');
+        let attaqspe2 = document.querySelector('#special2');
+        attaqspe.addEventListener('click', clickSpe);
+        attaqspe2.addEventListener('click', clickSpe);
+
+        function clickSpe() {
+            if (this.classList.contains('player1')) {
+                attackspe(perso1, perso2);
+                deplacement1.style.animationName = 'deplacement';
+                deplacement1.addEventListener('animationend', function() {
+                    deplacement1.style.animationName = '';
+                });
+                textats1.style.animationName = 'apparitext1, deplatext1';
+                textats1.addEventListener('animationend', function() {
+                    textats1.style.animationName = '';
+                });
+                display();
+            } else {
+                attackspe(perso2, perso1);
+                deplacement2.style.animationName = 'deplacement2';
+                deplacement2.addEventListener('animationend', function() {
+                    deplacement2.style.animationName = '';
+                });
+                textats2.style.animationName = 'apparitext2, deplatext2';
+                textats2.addEventListener('animationend', function() {
+                    textats2.style.animationName = '';
+                });
+                display();
+            };
+        };
+
+        let rambimagau = document.querySelector('#popodroite');
+        let invent = document.querySelector('#invent1');
+        let rambimagau2 = document.querySelector('#popogauche');
+        let invent2 = document.querySelector('#invent2');
+        invent2.addEventListener('click', clickInv);
+        invent.addEventListener('click', clickInv);
+
+        function clickInv() {
+            if (this.classList.contains('player1')) {
+                useinvent(perso1, perso2);
+                rambimagau.style.animationName = 'apparition1';
+                rambimagau.addEventListener('animationend', function() {
+                    rambimagau.style.animationName = '';
+                });
+                display();
+            } else {
+                useinvent(perso2, perso1);
+                rambimagau2.style.animationName = 'apparition2';
+                rambimagau2.addEventListener('animationend', function() {
+                    rambimagau2.style.animationName = '';
+                });
+                display();
+            }
+        };
+    </script>
+</body>
+
+</html>
