@@ -68,7 +68,7 @@
                 'Inventaire': 3
             },
             hasToPlay: true
-        };
+        }
         let perso2 = {
             name: '',
             datas: {
@@ -78,10 +78,7 @@
                 'Inventaire': 5
             },
             hasToPlay: false
-        };
-
-        let persos = [perso1, perso2];
-
+        }
         let display = function() {
             table1.innerHTML = '';
             table2.innerHTML = '';
@@ -110,35 +107,37 @@
                 tr.appendChild(td);
                 donnees2.appendChild(tr);
             };
-        };
-        let buttons = document.querySelectorAll("#aplayer button");
-        for (let b of buttons) {
-            b.disabled = !perso1.hasToPlay;
-        };
-        buttons = document.querySelectorAll("#bplayer button");
-        for (let b of buttons) {
-            b.disabled = !perso2.hasToPlay;
-        };
 
-        let lifeval = document.querySelector('#tope0');
-        let lifeval2 = document.querySelector('#gate0');
-        if (perso2.datas.Vie >= 35) {
-            lifeval.style.color = 'green';
-        } else if (perso2.datas.Vie < 35 && perso2.datas.Vie >= 10) {
-            lifeval.style.color = 'yellow';
-        } else if (perso2.datas.Vie < 10 && perso2.datas.Vie > 0) {
-            lifeval.style.color = 'red';
-        } else {
-            lifeval.style.color = 'red'
-        };
-        if (perso1.datas.Vie >= 35) {
-            lifeval2.style.color = 'green';
-        } else if (perso1.datas.Vie < 35 && perso1.datas.Vie >= 10) {
-            lifeval2.style.color = 'yellow';
-        } else if (perso1.datas.Vie < 10 && perso1.datas.Vie > 0) {
-            lifeval2.style.color = 'red';
-        } else {
-            lifevale2.style.color = 'red';
+            let buttons = document.querySelectorAll("#aplayer button");
+            for (let b of buttons) {
+                b.disabled = !perso1.hasToPlay;
+            };
+            buttons = document.querySelectorAll("#bplayer button");
+            for (let b of buttons) {
+                b.disabled = !perso2.hasToPlay;
+            };
+
+            let lifeval = document.querySelector('#tope0');
+            let lifeval2 = document.querySelector('#gate0');
+            if (perso2.datas.Vie >= 35) {
+                lifeval.style.color = 'green';
+            } else if (perso2.datas.Vie < 35 && perso2.datas.Vie >= 10) {
+                lifeval.style.color = 'yellow';
+            } else if (perso2.datas.Vie < 10 && perso2.datas.Vie > 0) {
+                lifeval.style.color = 'red';
+            } else {
+                lifeval.style.color = 'red'
+            };
+            if (perso1.datas.Vie >= 35) {
+                lifeval2.style.color = 'green';
+            } else if (perso1.datas.Vie < 35 && perso1.datas.Vie >= 10) {
+
+                lifeval2.style.color = 'yellow';
+            } else if (perso1.datas.Vie < 10 && perso1.datas.Vie > 0) {
+                lifeval2.style.color = 'red';
+            } else {
+                lifevale2.style.color = 'red';
+            }
         };
 
         let name1 = document.getElementById('name1');
@@ -150,6 +149,7 @@
         name1.textContent = perso1.name;
         name2.textContent = perso2.name;
 
+        let persos = [perso1, perso2];
         display();
 
         let attack = function(perso, persoautre) {
@@ -183,6 +183,7 @@
             };
             persoautre.hasToPlay = true;
             perso.hasToPlay = false;
+
         };
 
         let attackspe = function(perso, persoautre) {
@@ -202,10 +203,12 @@
             };
         };
 
+        let defval = document.querySelector('#gate2');
         let defendre = document.querySelector('#defense1');
         let player1 = document.querySelectorAll('.player1');
         let player2 = document.querySelector('.player2');
         let defense2 = document.querySelector('#defense2');
+
         defendre.addEventListener('click', clickDefense);
         defense2.addEventListener('click', clickDefense);
 
@@ -230,20 +233,25 @@
         let textat2 = document.querySelector('#texto2');
         let textats1 = document.querySelector('#textos1');
         let textats2 = document.querySelector('#textos2');
+        let lifeval = document.querySelector('#tope0');
         let attaquer = document.querySelector('#attack1');
         let deplacement1 = document.querySelector('#imagegauche');
         let deplacement2 = document.querySelector('#imagedroite');
+        let lifeval2 = document.querySelector('#gate0');
         let attaquer2 = document.querySelector('#attack2');
+
         attaquer.addEventListener('click', clickAttaque);
         attaquer2.addEventListener('click', clickAttaque);
 
         function clickAttaque() {
             if (this.classList.contains('player1')) {
                 attack(perso1, perso2);
+
                 deplacement1.style.animationName = 'deplacement';
                 deplacement1.addEventListener('animationend', function() {
                     deplacement1.style.animationName = '';
                 });
+
                 textat1.style.animationName = 'apparitext1, deplatext1';
                 textat1.addEventListener('animationend', function() {
                     textat1.style.animationName = '';
@@ -251,6 +259,7 @@
                 display();
             } else {
                 attack(perso2, perso1);
+
                 deplacement2.style.animationName = 'deplacement2';
                 deplacement2.addEventListener('animationend', function() {
                     deplacement2.style.animationName = '';
@@ -264,8 +273,8 @@
         };
 
         let attaqspe = document.querySelector('#special1');
-        let attaqspe2 = document.querySelector('#special2');
         attaqspe.addEventListener('click', clickSpe);
+        let attaqspe2 = document.querySelector('#special2');
         attaqspe2.addEventListener('click', clickSpe);
 
         function clickSpe() {
