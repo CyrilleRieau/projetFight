@@ -84,7 +84,6 @@
             table2.innerHTML = '';
             let donnees1 = document.querySelector('#table1');
             for (let i = 0; i < Object.keys(perso1.datas).length; i++) {
-                ''
                 let tr = document.createElement('tr');
                 let th = document.createElement('th');
                 th.textContent = (Object.keys(perso1.datas))[i];
@@ -250,13 +249,21 @@
                         */
         let defval = document.querySelector('#gate2');
         let defendre = document.querySelector('#defense1');
-        let player1 = document.querySelectorAll('player1');
-        let player2 = document.querySelector('player2');
+        let player1 = document.querySelectorAll('.player1');
+        let player2 = document.querySelector('.player2');
         let defense2 = document.querySelector('#defense2');
 
-        // Par Jean //... En fait n'a pas changé ... Toujours 2 eventlistener... Pas trouvé la bonne technique...
+        // Par Jean
+
+        /*let deplacement = {
+            player1: deplacement1,
+            player2: deplacement2
+        */ // Pour simplifier animations, créer objets qui contiennent animations
+        // et ensuite faire que le if renvoie sur les valeurs choisies de perso, 
+        // c-a-d player 1 ou player 2 et qu'elles soient asosciées avec les 
+        // différentes animations correspondantes
         defendre.addEventListener('click', clickDefense);
-        //defense2.addEventListener('click', clickDefense); Supprimer cet evenement
+        defense2.addEventListener('click', clickDefense);
 
         function clickDefense() {
             if (this.classList.contains('player1')) {
@@ -267,7 +274,7 @@
                 })
             } else { //modifier le else pour que lance le click du bouton b...// (this.classList.contains('player2'))
                 //let buttons = document.querySelector('#bplayer button');
-                //buttons.enabled; Ne fonctionne pas avec cela
+                //buttons.disabled = false;
                 defense(perso2, perso1);
                 deplacement2.style.animationName = 'taille2';
                 deplacement2.addEventListener('animationend', function() {
@@ -294,89 +301,104 @@
         let textats2 = document.querySelector('#textos2');
         let lifeval = document.querySelector('#tope0');
         let attaquer = document.querySelector('#attack1');
-        attaquer.addEventListener('click', function() {
-            attack(perso1, perso2);
-            display();
-            deplacement1.style.animationName = 'deplacement';
-            deplacement1.addEventListener('animationend', function() {
-                deplacement1.style.animationName = '';
-            });
-
-            textat1.style.animationName = 'apparitext1, deplatext1';
-            textat1.addEventListener('animationend', function() {
-                textat1.style.animationName = '';
-            });
-        });
         let deplacement1 = document.querySelector('#imagegauche');
-
         let deplacement2 = document.querySelector('#imagedroite');
         let lifeval2 = document.querySelector('#gate0');
         let attaquer2 = document.querySelector('#attack2');
-        attaquer2.addEventListener('click', function() {
-            attack(perso2, perso1);
-            display();
 
-            deplacement2.style.animationName = 'deplacement2';
-            deplacement2.addEventListener('animationend', function() {
-                deplacement2.style.animationName = '';
-            });
-            textat2.style.animationName = 'apparitext2, deplatext2';
-            textat2.addEventListener('animationend', function() {
-                textat2.style.animationName = '';
-            });
-        });
+        attaquer.addEventListener('click', clickAttaque);
+        attaquer2.addEventListener('click', clickAttaque);
+
+        function clickAttaque() {
+            if (this.classList.contains('player1')) {
+                attack(perso1, perso2);
+
+                deplacement1.style.animationName = 'deplacement';
+                deplacement1.addEventListener('animationend', function() {
+                    deplacement1.style.animationName = '';
+                });
+
+                textat1.style.animationName = 'apparitext1, deplatext1';
+                textat1.addEventListener('animationend', function() {
+                    textat1.style.animationName = '';
+                });
+                display();
+            } else {
+                attack(perso2, perso1);
+
+                deplacement2.style.animationName = 'deplacement2';
+                deplacement2.addEventListener('animationend', function() {
+                    deplacement2.style.animationName = '';
+                });
+                textat2.style.animationName = 'apparitext2, deplatext2';
+                textat2.addEventListener('animationend', function() {
+                    textat2.style.animationName = '';
+                });
+                display();
+            };
+        }
         let attaqspe = document.querySelector('#special1');
-        attaqspe.addEventListener('click', function() {
-            attackspe(perso1, perso2);
-            display();
-            deplacement1.style.animationName = 'deplacement';
-            deplacement1.addEventListener('animationend', function() {
-                deplacement1.style.animationName = '';
-            });
-
-            textats1.style.animationName = 'apparitext1, deplatext1';
-            textats1.addEventListener('animationend', function() {
-                textats1.style.animationName = '';
-            });
-        });
-
+        attaqspe.addEventListener('click', clickSpe);
         let attaqspe2 = document.querySelector('#special2');
-        attaqspe2.addEventListener('click', function() {
-            attackspe(perso2, perso1);
-            display();
-            deplacement2.style.animationName = 'deplacement2';
-            deplacement2.addEventListener('animationend', function() {
-                deplacement2.style.animationName = '';
-            });
-            textats2.style.animationName = 'apparitext2, deplatext2';
-            textats2.addEventListener('animationend', function() {
-                textats2.style.animationName = '';
-            });
-        });
+        attaqspe2.addEventListener('click', clickSpe);
+
+        function clickSpe() {
+            if (this.classList.contains('player1')) {
+                attackspe(perso1, perso2);
+
+                deplacement1.style.animationName = 'deplacement';
+                deplacement1.addEventListener('animationend', function() {
+                    deplacement1.style.animationName = '';
+                });
+
+                textats1.style.animationName = 'apparitext1, deplatext1';
+                textats1.addEventListener('animationend', function() {
+                    textats1.style.animationName = '';
+                });
+                display();
+            } else {
+                attackspe(perso2, perso1);
+
+                deplacement2.style.animationName = 'deplacement2';
+                deplacement2.addEventListener('animationend', function() {
+                    deplacement2.style.animationName = '';
+                });
+                textats2.style.animationName = 'apparitext2, deplatext2';
+                textats2.addEventListener('animationend', function() {
+                    textats2.style.animationName = '';
+                });
+                display();
+            };
+        };
         /*let valpot = document.querySelector('#gate0');
         let potinv = document.querySelector('#gate3');*/
         let rambimagau = document.querySelector('#popodroite');
         let invent = document.querySelector('#invent1');
-        invent.addEventListener('click', function() {
-            useinvent(perso1, perso2);
-            rambimagau.style.animationName = 'apparition1';
-            rambimagau.addEventListener('animationend', function() {
-                rambimagau.style.animationName = '';
-            });
-            display();
-        });
         let rambimagau2 = document.querySelector('#popogauche');
         /*let valpot2 = document.querySelector('#tope0');
         let potinv2 = document.querySelector('#tope3');*/
         let invent2 = document.querySelector('#invent2');
-        invent2.addEventListener('click', function() {
-            useinvent(perso2, perso1);
-            rambimagau2.style.animationName = 'apparition2';
-            rambimagau2.addEventListener('animationend', function() {
-                rambimagau2.style.animationName = '';
-            });
-            display()
-        });
+        invent2.addEventListener('click', clickInv);
+
+        invent.addEventListener('click', clickInv);
+
+        function clickInv() {
+            if (this.classList.contains('player1')) {
+                useinvent(perso1, perso2);
+                rambimagau.style.animationName = 'apparition1';
+                rambimagau.addEventListener('animationend', function() {
+                    rambimagau.style.animationName = '';
+                });
+                display();
+            } else {
+                useinvent(perso2, perso1);
+                rambimagau2.style.animationName = 'apparition2';
+                rambimagau2.addEventListener('animationend', function() {
+                    rambimagau2.style.animationName = '';
+                });
+                display()
+            }
+        };
         /*
                 let aplayer = document.querySelector('#aplayer');
                 let bplayer = document.querySelector('#bplayer');
