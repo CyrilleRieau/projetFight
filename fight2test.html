@@ -28,7 +28,7 @@
         </div>
 
         <div id='aplayer'>
-            <button type="button" id='attack1' class="player1">Attaquer</button>
+            <button type="button" id='attack1' class="player1 toucheA">Attaquer</button>
             <button type="button" id='invent1' class="player1">Utiliser une potion</button>
             <button type="button" id='defense1' class="player1">Se défendre</button>
             <button type="button" id='special1' class="player1">Attaque Spéciale</button>
@@ -64,15 +64,15 @@
             datas: {
                 'Vie': 50,
                 'Attaque': 8,
-                'Défense': 6,
-                'Inventaire': 3
+                'Défense': 7,
+                'Inventaire': 4
             },
             hasToPlay: true
         }
         let perso2 = {
             name: '',
             datas: {
-                'Vie': 50,
+                'Vie': 55,
                 'Attaque': 7,
                 'Défense': 9,
                 'Inventaire': 5
@@ -378,8 +378,8 @@
         /*let valpot2 = document.querySelector('#tope0');
         let potinv2 = document.querySelector('#tope3');*/
         let invent2 = document.querySelector('#invent2');
-        invent2.addEventListener('click', clickInv);
 
+        invent2.addEventListener('click', clickInv);
         invent.addEventListener('click', clickInv);
 
         function clickInv() {
@@ -399,6 +399,120 @@
                 display()
             }
         };
+        //Rajout evenement sur le click de la touche A pour l'attaque
+        document.addEventListener('keypress', function(event) {
+            if (perso1.hasToPlay) {
+                const keyName = event.key;
+                if (keyName === 'a') {
+                    attack(perso1, perso2);
+
+                    deplacement1.style.animationName = 'deplacement';
+                    deplacement1.addEventListener('animationend', function() {
+                        deplacement1.style.animationName = '';
+                    });
+
+                    textat1.style.animationName = 'apparitext1, deplatext1';
+                    textat1.addEventListener('animationend', function() {
+                        textat1.style.animationName = '';
+                    });
+                    display();
+                }
+            } else if (perso2.hasToPlay) {
+                const keyName = event.key;
+                if (keyName === 'a') {
+                    attack(perso2, perso1);
+                    deplacement2.style.animationName = 'deplacement2';
+                    deplacement2.addEventListener('animationend', function() {
+                        deplacement2.style.animationName = '';
+                    });
+                    textat2.style.animationName = 'apparitext2, deplatext2';
+                    textat2.addEventListener('animationend', function() {
+                        textat2.style.animationName = '';
+                    });
+                    display();
+                }
+            }
+        });
+        //Rajout evenement sur le click de la touche D pour la défense
+        document.addEventListener('keypress', function(event) {
+            if (perso1.hasToPlay) {
+                const keyName = event.key;
+                if (keyName === 'd') {
+                    defense(perso1, perso2);
+                    deplacement1.style.animationName = 'taille1';
+                    deplacement1.addEventListener('animationend', function() {
+                        deplacement1.style.animationName = '';
+                    });
+                    display();
+                }
+            } else if (perso2.hasToPlay) {
+                const keyName = event.key;
+                if (keyName === 'd') {
+                    defense(perso2, perso1);
+                    deplacement2.style.animationName = 'taille2';
+                    deplacement2.addEventListener('animationend', function() {
+                        deplacement2.style.animationName = '';
+                    });
+                    display();
+                }
+            }
+        });
+        //Rajout evenement sur le click de la touche I pour l'inventaire
+        document.addEventListener('keypress', function(event) {
+            if (perso1.hasToPlay) {
+                const keyName = event.key;
+                if (keyName === 'i') {
+                    useinvent(perso1, perso2);
+                    rambimagau.style.animationName = 'apparition1';
+                    rambimagau.addEventListener('animationend', function() {
+                        rambimagau.style.animationName = '';
+                    });
+                    display();
+                }
+            } else if (perso2.hasToPlay) {
+                const keyName = event.key;
+                if (keyName === 'i') {
+                    useinvent(perso2, perso1);
+                    rambimagau2.style.animationName = 'apparition2';
+                    rambimagau2.addEventListener('animationend', function() {
+                        rambimagau2.style.animationName = '';
+                    });
+                    display();
+                }
+            }
+        });
+        //Rajout evenement sur le click de la touche S pour l'attaque spéciale
+        document.addEventListener('keypress', function(event) {
+            if (perso1.hasToPlay) {
+                const keyName = event.key;
+                if (keyName === 's') {
+                    attackspe(perso1, perso2);
+                    deplacement1.style.animationName = 'deplacement';
+                    deplacement1.addEventListener('animationend', function() {
+                        deplacement1.style.animationName = '';
+                    });
+                    textats1.style.animationName = 'apparitext1, deplatext1';
+                    textats1.addEventListener('animationend', function() {
+                        textats1.style.animationName = '';
+                    });
+                    display();
+                }
+            } else if (perso2.hasToPlay) {
+                const keyName = event.key;
+                if (keyName === 's') {
+                    attackspe(perso2, perso1);
+                    deplacement2.style.animationName = 'deplacement2';
+                    deplacement2.addEventListener('animationend', function() {
+                        deplacement2.style.animationName = '';
+                    });
+                    textats2.style.animationName = 'apparitext2, deplatext2';
+                    textats2.addEventListener('animationend', function() {
+                        textats2.style.animationName = '';
+                    });
+                    display();
+                }
+            }
+        });
         /*
                 let aplayer = document.querySelector('#aplayer');
                 let bplayer = document.querySelector('#bplayer');
