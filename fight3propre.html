@@ -85,9 +85,7 @@
             let donnees1 = document.querySelector('#table1');
             for (let i = 0; i < Object.keys(perso1.datas).length; i++) {
                 let tr = document.createElement('tr');
-                let th = document.createElement('th');
-                th.textContent = (Object.keys(perso1.datas))[i];
-                tr.appendChild(th);
+                tr.textContent = (Object.keys(perso1.datas)[i]);
                 let td = document.createElement('td');
                 td.id = 'gate' + i;
                 td.textContent = parseInt(Object.values(perso1.datas)[i]);
@@ -98,9 +96,7 @@
             let donnees2 = document.querySelector('#table2');
             for (let i = 0; i < Object.keys(perso2.datas).length; i++) {
                 let tr = document.createElement('tr');
-                let th = document.createElement('th');
-                th.textContent = (Object.keys(perso2.datas))[i];
-                tr.appendChild(th);
+                tr.textContent = (Object.keys(perso2.datas)[i]);
                 let td = document.createElement('td');
                 td.id = 'tope' + i;
                 td.textContent = parseInt(Object.values(perso2.datas)[i]);
